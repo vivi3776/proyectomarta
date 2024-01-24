@@ -1,8 +1,10 @@
 from ruleta import ruleta
 
+
 class Jugador:
     nombre: str
     puntuacion: float
+    ruleta: ruleta
 
     def __init__(self, nombre: str, puntuacion: float):
         self.nombre = nombre
@@ -10,18 +12,18 @@ class Jugador:
 
     def __str__(self):
         return f"Bievenido {self.nombre} empiezas con {self.puntuacion}"
-    
-    def tirar():
-    pass
-    
+
+    def tirar(this):
+        pass
+
     def comprar_vocal():
-    pass
+        pass
 
     def decir_letra():
+        pass
 
     def resolver_panel():
-    pass
-
+        pass
 
 
 j1 = Jugador("Jorge", 5.0)

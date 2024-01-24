@@ -1,5 +1,5 @@
 import random
 
+
 class Tirada:
-    casillas:
-    
+    casillas: str
