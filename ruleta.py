@@ -6,7 +6,7 @@ class Ruleta:
     letras: dict
 
     def __init__(self):
-        self.abecedario = dict.fromkeys("abcdefghijklmnopqrstuvwxyz", False)
+        self.letras = dict.fromkeys("abcdefghijklmnopqrstuvwxyz", False)
         self.gajos = [
             "QUIEBRA",
             "PIERDE TURNO",
