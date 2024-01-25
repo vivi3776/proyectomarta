@@ -1,4 +1,4 @@
-class vista:
+class Vista:
     pass
 
     def inicio():
