@@ -1,5 +1,6 @@
 from Modelo import Modelo
 from vista import Vista
+import time
 
 
 class Controlador:
@@ -10,16 +11,22 @@ class Controlador:
         self.modelo = modelo
         self.vista = vista
 
+    def bienvenida(self):
+        self.vista.bienvenida()
+
+    def salir(self):
+        self.vista.salir()
+
     def menu(self):
         menu = self.vista.menu()
 
-        if menu == 1:
+        if menu == 1:  # Añadir jugador
             self.crear_jugador()
-        elif menu == 2:
+        elif menu == 2:  # Mostrar jugador
             pass
-        elif menu == 3:
+        elif menu == 3:  # Jugar
             pass
-        elif menu == 4:
+        elif menu == 4:  # Salir
             self.vista.salir()
 
     def crear_jugador(self):
@@ -30,6 +37,9 @@ class Controlador:
             self.vista.jugador_no_creado()
 
         self.menu()
+
+    def mostrar_jugadores(self):
+        pass
 
     def decir_letra(self):
         letra = self.vista.decir_letra()
@@ -47,7 +57,7 @@ class Controlador:
         elif return_vocal == 1:  # Se ha comprado la vocal
             self.vista.vocal_comprada()
 
-        elif return_vocal == 2:  # No se compro vocal ya dicha
+        elif return_vocal == 2:  # No se compra vocal ya dicha
             self.vista.letra_ya_dicha()
 
     def resolver_panel(self):
@@ -58,6 +68,32 @@ class Controlador:
         else:
             self.vista.panel_incorrecto()
 
+    def tirar(self):
+        tirada = self.modelo.tirar()
+        if tirada == "0":  # Quiebra
+            self.vista.caer_quiebra()
+        elif tirada == "1":  # Pierde turno
+            self.vista.caer_pierde_turno
+
+        elif tirada == "2":  # Comodin
+            self.vista.caer_comodin
+
+        elif tirada == "3":  # x2
+            self.vista.caer_x2
+
+        elif tirada == "4":  # /2
+            self.vista.caer_e2
+
+        else:  # Gajo normal
+            self.vista.caer(tirada)
+
+    def inicio(self):
+        self.bienvenida()
+        time.sleep(1)
+        self.menu()
+
 
 controlador = Controlador(modelo=Modelo(), vista=Vista())
-controlador.menu()
+
+controlador.tirar()
+controlador.tirar()

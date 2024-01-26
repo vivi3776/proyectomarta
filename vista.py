@@ -57,3 +57,31 @@ class Vista:
 
     def panel_incorrecto(self):
         print("Has fallado! Prueba otra vez")
+
+    def caer_quiebra(self):
+        print("Mala suerte!")
+        print("Has caido en quiebra!")
+        print("Pierdes tu turno y tu dinero")
+
+    def caer_pierde_turno(self):
+        print("Mala suerte!")
+        print("Has caido en Pierde Turno")
+        print("Pierdes tu turno")
+
+    def caer_comodin(self):
+        print("Enhorabuena!")
+        print("Has caido en Comodin")
+        print("Recibes un comodin")
+
+    def caer_x2(self):
+        print("Enhorabuena!")
+        print("Has caido en X2")
+        print("Duplicas tu dinero")
+
+    def caer_e2(self):
+        print("Mala suerte!")
+        print("Has caido en 1/2")
+        print("Pierdes la mitad del dinero")
+
+    def caer(self, gajo):
+        print(f"Has caido en: {gajo}")
