@@ -4,8 +4,10 @@ letras = {letra: False for letra in "abcdefghijklmnopqrstuvwxyz"}
 class Ruleta:
     gajos: list
     letras: dict
+    panel: str
 
     def __init__(self):
+        self.panel = "paris"
         self.letras = dict.fromkeys("abcdefghijklmnopqrstuvwxyz", False)
         self.gajos = [
             "QUIEBRA",

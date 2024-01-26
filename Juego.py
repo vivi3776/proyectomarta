@@ -1,4 +1,4 @@
-from vista import Vista
+# from vista import Vista
 from jugador import Jugador
 from ruleta import Ruleta
 
@@ -6,23 +6,26 @@ import random
 
 
 class Juego:
-    vista: Vista
+    # vista: Vista
     jugador: Jugador
     ruleta: Ruleta
     jugadores: list[Jugador]
 
     def __init__(self):
-        self.vista = Vista()
+        # self.vista = Vista()
         self.ruleta = Ruleta()
-        self.jugadores[]
+        self.jugadores = []
         self.jugador = Jugador("Juan", 50)
 
-
-    def agregar_jugador(self, jugador:Jugador):
+    def agregar_jugador(self, jugador: Jugador):
         if jugador not in self.jugadores:
             self.jugadores.append(jugador)
         else:
             raise Exception("Este jugador ya existe")
+
+    def mostrar_jugadores(self):
+        for jugador in self.jugadores:
+            print(jugador)
 
     def tirar(self):
         valor = random.randint(0, 23)
@@ -59,7 +62,11 @@ class Juego:
         else:
             return f"Esa letra ya esta dicha"
 
+    def resolver_panel(self, panel):
+        if panel == self.ruleta.panel:
+            return f"Has acertado"
+        else:
+            return f"Has fallado"
+
 
 juego = Juego()
-print(juego.tirar())
-print(juego.tirar())
