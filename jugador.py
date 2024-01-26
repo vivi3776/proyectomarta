@@ -7,7 +7,7 @@ class Jugador:
     puntuacion: float
     comodines: int
 
-    def __init__(self, nombre: str, puntuacion: float, comodines=0):
+    def __init__(self, nombre: str, puntuacion: float = 100, comodines: int = 0):
         self.nombre = nombre
         self.puntuacion = puntuacion
         self.comodines = comodines

@@ -5,7 +5,7 @@ from ruleta import Ruleta
 import random
 
 
-class Juego:
+class Modelo:
     # vista: Vista
     jugador: Jugador
     ruleta: Ruleta
@@ -15,13 +15,16 @@ class Juego:
         # self.vista = Vista()
         self.ruleta = Ruleta()
         self.jugadores = []
-        self.jugador = Jugador("Juan", 50)
+        self.jugador = Jugador(
+            "Juan",
+        )
 
     def agregar_jugador(self, jugador: Jugador):
         if jugador not in self.jugadores:
             self.jugadores.append(jugador)
+            return True
         else:
-            raise Exception("Este jugador ya existe")
+            return False
 
     def mostrar_jugadores(self):
         for jugador in self.jugadores:
@@ -49,24 +52,24 @@ class Juego:
             if self.ruleta.letras[vocal] == False:
                 self.ruleta.letras[vocal] = True
                 self.jugador.puntuacion -= 50
-                return f"Has comprado la letra {vocal} ahora tienes {self.jugador.puntuacion}"
+                return 1
             else:
-                return f"No has comprado"
+                return 2
         else:
-            return f"No tienes suficiente dinero"
+            return 0
 
     def decir_letra(self, letra):
         if self.ruleta.letras[letra] == False:
             self.ruleta.letras[letra] = True
-            return f"Has dicho la letra {letra}"
+            return True
         else:
-            return f"Esa letra ya esta dicha"
+            return False
 
     def resolver_panel(self, panel):
         if panel == self.ruleta.panel:
-            return f"Has acertado"
+            return True
         else:
-            return f"Has fallado"
+            return False
 
 
-juego = Juego()
+juego = Modelo()
