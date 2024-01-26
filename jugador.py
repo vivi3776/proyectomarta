@@ -15,6 +15,9 @@ class Jugador:
     def __str__(self):
         return f"Bienvenido {self.nombre}, empiezas con {self.puntuacion}"
 
+    def mostrar_puntuacion(self):
+        return {self.puntuacion}
+
 
 # Crear la instancia de Jugador
 j1 = Jugador("Jorge", 5.0)

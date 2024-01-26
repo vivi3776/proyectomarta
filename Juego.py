@@ -9,18 +9,35 @@ class Juego:
     vista: Vista
     jugador: Jugador
     ruleta: Ruleta
+    jugadores: list[Jugador]
 
     def __init__(self):
         self.vista = Vista()
         self.ruleta = Ruleta()
+        self.jugadores[]
         self.jugador = Jugador("Juan", 50)
+
+
+    def agregar_jugador(self, jugador:Jugador):
+        if jugador not in self.jugadores:
+            self.jugadores.append(jugador)
+        else:
+            raise Exception("Este jugador ya existe")
 
     def tirar(self):
         valor = random.randint(0, 23)
-        tirada = self.ruleta.gajos[random.randint(0, 23)]
-        if valor <= 3:  # Es un gajo especial
-            return f"Has caido en {tirada}"
-        else:  # Es un gajo de dinero
+        tirada = self.ruleta.gajos[valor]
+        if valor == 0:
+            return f"Has caido en QUIEBRA"  # QUIEBRA
+        elif valor == 1:
+            return f"Has caido en PIERDE TURNO"  # PIERDE TURNO
+        elif valor == 2:
+            return f"Has caido en COMODIN"  # COMODIN
+        elif valor == 3:
+            return f"Has caido en x2"
+        elif valor == 4:
+            return f"Has caido en /2"
+        else:
             self.jugador.puntuacion += int(tirada)
             return f"Has caido en {tirada},  ahora tienes {self.jugador.puntuacion}"
 
@@ -44,5 +61,5 @@ class Juego:
 
 
 juego = Juego()
-print(juego.decir_letra("b"))
-print(juego.decir_letra("c"))
+print(juego.tirar())
+print(juego.tirar())
