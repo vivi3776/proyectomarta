@@ -30,6 +30,17 @@ class Modelo:
         for jugador in self.jugadores:
             print(jugador)
 
+    def comprobar_comodin(self, numero):
+        jugador = self.jugadores[numero]
+        if jugador.comodines == 0:
+            return False
+        else:
+            return True
+
+    def usar_comodin(self, numero):
+        jugador = self.jugadores[0]
+        jugador.comodines -= 1
+
     def tirar(self):
         valor = random.randint(0, 23)
         tirada = self.ruleta.gajos[valor]
