@@ -46,22 +46,15 @@ class Controlador:
         while b_menu:
             menu = self.vista.menu_jugador()
 
-            if menu == 1:  # Tirar
+            if menu != 5:  # Tirar
                 b_menu = False
-                pass
-            elif menu == 2:  # Resolver panel
-                b_menu = False
-                pass
-            elif menu == 3:  # Ver comodines
-                b_menu = False
-                pass
-            elif menu == 4:  # Ver dinero actual
-                b_menu = False
-                pass
+
             else:
                 self.vista.error_menu()
                 time.sleep(2)
                 system("cls")
+
+        return menu
 
     def usar_comodin(self):
         comprobar_comodin = self.modelo.comprobar_comodin()
@@ -144,7 +137,17 @@ class Controlador:
         jugar = True
         if len(self.modelo.jugadores) >= 2:
             while jugar:
-                pass
+                jugador = self.modelo.jugadores[self.orden_jugador]
+                menu = self.menu_jugador()
+                if menu == 1:  # TIrar
+                    self.tirar()
+                elif menu == 2:  # Resolver
+                    pass
+                elif menu == 3:  # Ver comodines
+                    self.vista.mostrar_comodines(jugador.comodines)
+                elif menu == 4:  # Dinero
+                    self.vista.mostrar_dinero(jugador.puntuacion)
+
         else:
             self.vista.error_jugadores
             time.sleep(2)
@@ -161,7 +164,4 @@ class Controlador:
 
 controlador = Controlador(modelo=Modelo(), vista=Vista())
 controlador.menu_inicio()
-controlador.siguiente_jugador()
-controlador.siguiente_jugador()
-controlador.siguiente_jugador()
-controlador.siguiente_jugador()
+controlador.jugar()

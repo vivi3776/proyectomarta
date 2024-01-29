@@ -19,7 +19,8 @@ class Modelo:
             "Juan",
         )
 
-    def agregar_jugador(self, jugador: Jugador):
+    def agregar_jugador(self, nombre_jugador: str):
+        jugador = Jugador(nombre_jugador)
         if jugador not in self.jugadores:
             self.jugadores.append(jugador)
             return True

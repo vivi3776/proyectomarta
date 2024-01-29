@@ -36,6 +36,12 @@ class Vista:
         except:
             return 5
 
+    def mostrar_comodines(self, comodines):
+        print(f"Tus comodines actuales son: {comodines}")
+
+    def mostrar_dinero(self, dinero):
+        print(f"Tu dinero acumulado es: {dinero}€")
+
     def siguiente_jugador(self, jugador):
         print("-------------------------------")
         print(f"Ahora es el turno de {jugador}")

@@ -16,7 +16,7 @@ class Jugador:
         return f"Bienvenido {self.nombre}, empiezas con {self.puntuacion}"
 
     def mostrar_puntuacion(self):
-        return {self.puntuacion}
+        return self.puntuacion
 
 
 # Crear la instancia de Jugador
