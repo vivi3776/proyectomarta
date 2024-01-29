@@ -30,22 +30,39 @@ class Modelo:
         for jugador in self.jugadores:
             print(jugador)
 
+    def comprobar_comodin(self, numero):
+        jugador = self.jugadores[numero]
+        if jugador.comodines == 0:
+            return False
+        else:
+            return True
+
+    def usar_comodin(self, numero):
+        jugador = self.jugadores[0]
+        jugador.comodines -= 1
+
     def tirar(self):
         valor = random.randint(0, 23)
         tirada = self.ruleta.gajos[valor]
         if valor == 0:
-            return f"Has caido en QUIEBRA"  # QUIEBRA
+            self.jugador.puntuacion = 0
+            return "0"  # QUIEBRA
         elif valor == 1:
-            return f"Has caido en PIERDE TURNO"  # PIERDE TURNO
+            self.jugador.puntuacion = 0
+            return "1"  # PIERDE TURNO
+
         elif valor == 2:
-            return f"Has caido en COMODIN"  # COMODIN
-        elif valor == 3:
-            return f"Has caido en x2"
-        elif valor == 4:
-            return f"Has caido en /2"
+            self.jugador.comodines += 1
+            return "2"  # COMODIN
+        elif valor == 3:  # x2
+            self.jugador.puntuacion *= 2
+            return "3"
+        elif valor == 4:  # /2
+            self.jugador.puntuacion /= 2
+            return "4"
         else:
             self.jugador.puntuacion += int(tirada)
-            return f"Has caido en {tirada},  ahora tienes {self.jugador.puntuacion}"
+            return tirada
 
     def comprar_vocal(self, vocal):
         if self.jugador.puntuacion >= 50:
