@@ -6,9 +6,9 @@ class Ruleta:
 
     def __init__(self):
         self.panel = {
-            "CANCIÓN POPULAR": "Melodía conocida y apreciada por un amplio público",
+            "CANCIÓN POPULAR": "Melodía conocida y apreciada por un amplio publico",
             "REVOLUCIÓN INDUSTRIAL": "Paso de la producción manual a la industrial.",
-            "SMARTPHONE": "Dispositivo móvil con funciones avanzadas",
+            "SMARTPHONE": "Dispositivo movil con funciones avanzadas",
         }
         self.pista = ["CANCIÓN POPULAR", "REVOLUCIÓN INDUSTRIAL", "SMARTPHONE"]
 
