@@ -14,7 +14,7 @@ class Ruleta:
 
         self.letras = dict.fromkeys("abcdefghijklmnopqrstuvwxyz", False)
         self.gajos = [
-            "QUIEBRA",
+            "QUIEBRA",  # quiebra
             "PIERDE TURNO",
             "COMODIN",
             "X2",
