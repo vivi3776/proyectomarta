@@ -134,3 +134,6 @@ class Vista:
 
     def caer(self, gajo):
         print(f"Has caido en: {gajo}")
+
+    def panel(self, panel):
+        print(f"El panel es \n{panel}")

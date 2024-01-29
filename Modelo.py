@@ -11,6 +11,20 @@ class Modelo:
     ruleta: Ruleta
     jugadores: list[Jugador]
 
+    def generar_panel(self):
+        numero = random.randint(1, len(self.ruleta.panel))
+        pista = self.ruleta.pista[numero]
+        panel = self.ruleta.panel[pista]
+
+        panel_oculto = ""
+        for letra in panel:
+            if letra != " ":
+                panel_oculto = panel_oculto + "_"
+            else:
+                panel_oculto = panel_oculto + " "
+
+        return panel_oculto
+
     def __init__(self):
         # self.vista = Vista()
         self.ruleta = Ruleta()
@@ -31,18 +45,16 @@ class Modelo:
         for jugador in self.jugadores:
             print(jugador)
 
-    def comprobar_comodin(self, numero):
-        jugador = self.jugadores[numero]
+    def comprobar_comodin(self, jugador: Jugador):
         if jugador.comodines == 0:
             return False
         else:
             return True
 
-    def usar_comodin(self, numero):
-        jugador = self.jugadores[0]
+    def usar_comodin(self, jugador: Jugador):
         jugador.comodines -= 1
 
-    def tirar(self):
+    def tirar(self, jugador: Jugador):
         valor = random.randint(0, 23)
         tirada = self.ruleta.gajos[valor]
         if valor == 0:
@@ -53,16 +65,16 @@ class Modelo:
             return "1"  # PIERDE TURNO
 
         elif valor == 2:
-            self.jugador.comodines += 1
+            jugador.comodines += 1
             return "2"  # COMODIN
         elif valor == 3:  # x2
-            self.jugador.puntuacion *= 2
+            jugador.puntuacion *= 2
             return "3"
         elif valor == 4:  # /2
-            self.jugador.puntuacion /= 2
+            jugador.puntuacion /= 2
             return "4"
         else:
-            self.jugador.puntuacion += int(tirada)
+            jugador.puntuacion += int(tirada)
             return tirada
 
     def comprar_vocal(self, vocal):

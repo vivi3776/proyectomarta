@@ -56,19 +56,21 @@ class Controlador:
 
         return menu
 
-    def usar_comodin(self):
-        comprobar_comodin = self.modelo.comprobar_comodin()
+    def usar_comodin(self, jugador):
+        comprobar_comodin = self.modelo.comprobar_comodin(jugador)
         if comprobar_comodin:
             b_comodin = True
             while b_comodin:
-                opcion = self.quieres_usar_comodin()
+                opcion = self.vista.quieres_usar_comodin()
                 if opcion == "s":
                     b_comodin = False
                     self.vista.usar_comodin()
+                    return True
 
                 elif opcion == "n":
                     b_comodin = False
                     self.vista.no_usar_comodin()
+                    return False
 
     def crear_jugador(self):
         jugador = self.vista.crear_jugador()
@@ -110,11 +112,24 @@ class Controlador:
             self.vista.panel_incorrecto()
 
     def tirar(self):
-        tirada = self.modelo.tirar()
+        jugador = self.modelo.jugadores[self.orden_jugador]
+        tirada = self.modelo.tirar(jugador)
         if tirada == "0":  # Quiebra
             self.vista.caer_quiebra()
+            if self.usar_comodin(jugador):
+                self.vista.usar_comodin()
+                self.modelo.usar_comodin(jugador)
+            else:
+                jugador.puntuacion == 0  # TODO usar otra forma de reiniciar stats
+                self.siguiente_jugador()
+
         elif tirada == "1":  # Pierde turno
             self.vista.caer_pierde_turno
+            if self.usar_comodin(jugador):
+                self.vista.usar_comodin
+                self.modelo.usar_comodin(jugador)
+            else:
+                self.siguiente_jugador()
 
         elif tirada == "2":  # Comodin
             self.vista.caer_comodin
@@ -136,11 +151,14 @@ class Controlador:
     def jugar(self):
         jugar = True
         if len(self.modelo.jugadores) >= 2:
+            panel = self.modelo.generar_panel()
+            self.vista.panel(panel)
             while jugar:
                 jugador = self.modelo.jugadores[self.orden_jugador]
                 menu = self.menu_jugador()
                 if menu == 1:  # TIrar
                     self.tirar()
+
                 elif menu == 2:  # Resolver
                     pass
                 elif menu == 3:  # Ver comodines
@@ -159,7 +177,7 @@ class Controlador:
     def siguiente_jugador(self):
         self.orden_jugador = (self.orden_jugador + 1) % len(self.modelo.jugadores)
         jugador = self.modelo.jugadores[self.orden_jugador]
-        self.vista.siguiente_jugador(jugador)
+        self.vista.siguiente_jugador(jugador.nombre)
 
 
 controlador = Controlador(modelo=Modelo(), vista=Vista())

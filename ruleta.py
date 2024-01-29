@@ -1,13 +1,17 @@
-letras = {letra: False for letra in "abcdefghijklmnopqrstuvwxyz"}
-
-
 class Ruleta:
     gajos: list
     letras: dict
-    panel: str
+    panel: dict
+    pista: list
 
     def __init__(self):
-        self.panel = "paris"
+        self.panel = {
+            "CANCIÓN POPULAR": "Melodía conocida y apreciada por un amplio público",
+            "REVOLUCIÓN INDUSTRIAL": "Paso de la producción manual a la industrial.",
+            "SMARTPHONE": "Dispositivo móvil con funciones avanzadas",
+        }
+        self.pista = ["CANCIÓN POPULAR", "REVOLUCIÓN INDUSTRIAL", "SMARTPHONE"]
+
         self.letras = dict.fromkeys("abcdefghijklmnopqrstuvwxyz", False)
         self.gajos = [
             "QUIEBRA",
