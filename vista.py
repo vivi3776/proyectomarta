@@ -1,8 +1,8 @@
 class Vista:
     def bienvenida(self):
-        print("----------------------------")
+        print("---------------------------")
         print("--- RULETA DE LA SUERTE ---")
-        print("----------------------------")
+        print("---------------------------")
 
     def menu(self):
         print("1. Añadir jugador")
