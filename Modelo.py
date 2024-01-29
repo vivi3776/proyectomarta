@@ -4,12 +4,24 @@ from ruleta import Ruleta
 
 import random
 
+random.seed(1)
+
 
 class Modelo:
     # vista: Vista
     jugador: Jugador
     ruleta: Ruleta
     jugadores: list[Jugador]
+
+    def descubrir_panel(
+        self, panel: str, panel_oculto: str, letra: str
+    ):  # TODO NO FUNCIONA
+        for posicion in range(0, len(panel_oculto)):
+            print(posicion)
+            if panel[posicion] == letra:
+                panel_oculto[posicion] = letra
+
+        return panel_oculto
 
     def generar_panel(self):
         numero = random.randint(1, len(self.ruleta.panel))

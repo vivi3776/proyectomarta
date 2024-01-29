@@ -152,7 +152,8 @@ class Controlador:
         jugar = True
         if len(self.modelo.jugadores) >= 2:
             panel = self.modelo.generar_panel()
-            self.vista.panel(panel)
+            panel2 = self.modelo.descubrir_panel(self.modelo.ruleta.panel, panel, "a")
+            self.vista.panel(panel2)
             while jugar:
                 jugador = self.modelo.jugadores[self.orden_jugador]
                 menu = self.menu_jugador()
