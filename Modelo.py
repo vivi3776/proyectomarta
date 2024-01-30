@@ -16,12 +16,11 @@ class Modelo:
     def descubrir_panel(
         self, panel: str, panel_oculto: str, letra: str
     ):  # TODO NO FUNCIONA
-        for posicion in range(0, len(panel_oculto)):
-            print(posicion)
+        lista2 = list(panel_oculto)
+        for posicion in range(len(panel)):
             if panel[posicion] == letra:
-                panel_oculto[posicion] = letra
-
-        return panel_oculto
+                lista2[posicion] = letra
+        return lista2
 
     def generar_panel(self):
         numero = random.randint(1, len(self.ruleta.panel))
@@ -115,3 +114,5 @@ class Modelo:
 
 
 juego = Modelo()
+
+print(juego.descubrir_panel("hoalaa", "______", "a"))
