@@ -87,9 +87,10 @@ class Controlador:
     def decir_letra(self):
         letra = self.vista.decir_letra()
         if self.modelo.decir_letra(letra):
-            pass
+            return True
         else:
             self.vista.letra_ya_dicha()
+            return False
 
     def comprar_vocal(self):
         vocal = self.vista.comprar_vocal()
@@ -128,20 +129,29 @@ class Controlador:
             if self.usar_comodin(jugador):
                 self.vista.usar_comodin
                 self.modelo.usar_comodin(jugador)
+                return False
             else:
                 self.siguiente_jugador()
+                return False
 
         elif tirada == "2":  # Comodin
-            self.vista.caer_comodin
+            self.vista.caer_comodin()
+            return True
 
         elif tirada == "3":  # x2
-            self.vista.caer_x2
+            self.vista.caer_x2()
+            time.sleep(1)
+            return True
 
         elif tirada == "4":  # /2
-            self.vista.caer_e2
+            self.vista.caer_e2()
+            time.sleep(1)
+            return True
 
         else:  # Gajo normal
             self.vista.caer(tirada)
+            time.sleep(1)
+            return True
 
     def inicio(self):
         self.bienvenida()
@@ -158,7 +168,8 @@ class Controlador:
                 jugador = self.modelo.jugadores[self.orden_jugador]
                 menu = self.menu_jugador()
                 if menu == 1:  # TIrar
-                    self.tirar()
+                    if self.tirar():
+                        self.decir_letra()
 
                 elif menu == 2:  # Resolver
                     pass
