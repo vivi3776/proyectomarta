@@ -31,6 +31,7 @@ class Controlador:
                 b_menu = False
                 self.modelo.mostrar_jugadores()
             elif menu == 3:  # Jugar
+                self.jugar()
                 b_menu = False
             elif menu == 4:  # Salir
                 b_menu = False
@@ -82,15 +83,16 @@ class Controlador:
         self.menu_inicio()
 
     def mostrar_jugadores(self):
+        # TODO MOSTRAR JUGADORES
         pass
 
     def decir_letra(self):
         letra = self.vista.decir_letra()
         if self.modelo.decir_letra(letra):
-            return True
+            return letra
         else:
             self.vista.letra_ya_dicha()
-            return False
+            return ""
 
     def comprar_vocal(self):
         vocal = self.vista.comprar_vocal()
@@ -104,13 +106,15 @@ class Controlador:
         elif return_vocal == 2:  # No se compra vocal ya dicha
             self.vista.letra_ya_dicha()
 
-    def resolver_panel(self):
-        panel = self.vista.resolver_panel()
+    def resolver_panel(self, panel):
+        panel_jugador = self.vista.resolver_panel()
 
-        if self.modelo.resolver_panel(panel):
+        if self.modelo.resolver_panel(panel_jugador, panel):
             self.vista.panel_correcto()
+            return True
         else:
             self.vista.panel_incorrecto()
+            return False
 
     def tirar(self):
         jugador = self.modelo.jugadores[self.orden_jugador]
@@ -161,18 +165,39 @@ class Controlador:
     def jugar(self):
         jugar = True
         if len(self.modelo.jugadores) >= 2:
-            panel = self.modelo.generar_panel()
-            panel2 = self.modelo.descubrir_panel(self.modelo.ruleta.panel, panel, "a")
-            self.vista.panel(panel2)
+            panel_oculto, panel = self.modelo.generar_panel()
+            self.vista.panel(panel_oculto)
             while jugar:
                 jugador = self.modelo.jugadores[self.orden_jugador]
                 menu = self.menu_jugador()
                 if menu == 1:  # TIrar
                     if self.tirar():
-                        self.decir_letra()
+                        letra = self.decir_letra()
+                        if letra != "":
+                            panel_oculto_2 = self.modelo.descubrir_panel(
+                                panel, panel_oculto, letra
+                            )
+                            if (
+                                panel_oculto == panel_oculto_2
+                            ):  # La letra no estaba en el panel
+                                self.vista.letra_no_en_panel()
+                                time.sleep(1)
+                                self.siguiente_jugador()
+                            else:  # La letra estaba en el panel y sigues jugando
+                                panel_oculto = panel_oculto_2
+                                self.vista.letra_en_panel()
+                                time.sleep(1)
+                                self.vista.panel(panel_oculto)  # TODO pedir por comodin
+
+                        else:  # Letra ya dichaa
+                            self.siguiente_jugador()
 
                 elif menu == 2:  # Resolver
-                    pass
+                    if self.resolver_panel(panel):
+                        time.sleep(3)
+                        jugar = False
+                    else:
+                        self.siguiente_jugador()
                 elif menu == 3:  # Ver comodines
                     self.vista.mostrar_comodines(jugador.comodines)
                 elif menu == 4:  # Dinero
@@ -193,5 +218,4 @@ class Controlador:
 
 
 controlador = Controlador(modelo=Modelo(), vista=Vista())
-controlador.menu_inicio()
-controlador.jugar()
+controlador.inicio()

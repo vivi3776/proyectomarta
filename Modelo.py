@@ -18,7 +18,7 @@ class Modelo:
     ):  # TODO NO FUNCIONA
         lista2 = list(panel_oculto)
         for posicion in range(len(panel)):
-            if panel[posicion] == letra:
+            if panel[posicion].lower() == letra.lower():
                 lista2[posicion] = letra
         return lista2
 
@@ -34,7 +34,7 @@ class Modelo:
             else:
                 panel_oculto = panel_oculto + " "
 
-        return panel_oculto
+        return panel_oculto, panel
 
     def __init__(self):
         # self.vista = Vista()
@@ -106,13 +106,11 @@ class Modelo:
         else:
             return False
 
-    def resolver_panel(self, panel):
-        if panel == self.ruleta.panel:
+    def resolver_panel(self, panel_jugador, panel):
+        if panel_jugador == panel:
             return True
         else:
             return False
 
 
-juego = Modelo()
-
-print(juego.descubrir_panel("hoalaa", "______", "a"))
+# juego = Modelo()

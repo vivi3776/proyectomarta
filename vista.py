@@ -101,6 +101,14 @@ class Vista:
         panel = input("")
         return panel
 
+    def letra_no_en_panel(self):
+        print("La letra no estaba en el panel!")
+        print("Pierdes el turno!")
+
+    def letra_en_panel(self):
+        print("La letra estaba en el panel!")
+        print("Este es el panel actualizado!")
+
     def panel_correcto(self):
         print("Has acertado el panel! Felicidades")
 
