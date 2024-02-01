@@ -1,6 +1,7 @@
 class Ruleta:
     gajos: list
-    letras: dict
+    consonantes = dict.fromkeys("bcdfghjklmnpqrstvwxyz", False)
+    vocales = dict.fromkeys("aeiou", False)
     panel: dict
     pista: list
 
@@ -12,7 +13,6 @@ class Ruleta:
         }
         self.pista = ["CANCIÓN POPULAR", "REVOLUCIÓN INDUSTRIAL", "SMARTPHONE"]
 
-        self.letras = dict.fromkeys("abcdefghijklmnopqrstuvwxyz", False)
         self.gajos = [
             "QUIEBRA",  # quiebra
             "PIERDE TURNO",

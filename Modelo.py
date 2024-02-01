@@ -65,46 +65,72 @@ class Modelo:
     def usar_comodin(self, jugador: Jugador):
         jugador.comodines -= 1
 
+    def actualizar_info(self, jugador: Jugador, valor):
+        if valor == 0:
+            self.jugador.puntuacion = 0
+            # QUIEBRA
+        elif valor == 1:
+            self.jugador.puntuacion = 0
+            # PIERDE TURNO
+
+        elif valor == 2:
+            jugador.comodines += 1
+            # COMODIN
+        elif valor == 3:  # x2
+            jugador.puntuacion *= 2
+
+        elif valor == 4:  # /2
+            jugador.puntuacion /= 2
+
+        else:
+            jugador.puntuacion += int(valor)
+
     def tirar(self, jugador: Jugador):
         valor = random.randint(0, 23)
         tirada = self.ruleta.gajos[valor]
         if valor == 0:
-            self.jugador.puntuacion = 0
+            # self.jugador.puntuacion = 0
             return "0"  # QUIEBRA
         elif valor == 1:
-            self.jugador.puntuacion = 0
+            # self.jugador.puntuacion = 0
             return "1"  # PIERDE TURNO
 
         elif valor == 2:
-            jugador.comodines += 1
+            # jugador.comodines += 1
             return "2"  # COMODIN
         elif valor == 3:  # x2
-            jugador.puntuacion *= 2
+            # jugador.puntuacion *= 2
             return "3"
         elif valor == 4:  # /2
-            jugador.puntuacion /= 2
+            # jugador.puntuacion /= 2
             return "4"
         else:
-            jugador.puntuacion += int(tirada)
+            # jugador.puntuacion += int(tirada)
             return tirada
 
     def comprar_vocal(self, vocal):
         if self.jugador.puntuacion >= 50:
-            if self.ruleta.letras[vocal] == False:
-                self.ruleta.letras[vocal] = True
-                self.jugador.puntuacion -= 50
-                return 1
-            else:
-                return 2
+            try:
+                if self.ruleta.vocales[vocal] == False:
+                    self.ruleta.vocales[vocal] = True
+                    self.jugador.puntuacion -= 50
+                    return 1
+                else:
+                    return 2
+            except:
+                return -1
         else:
             return 0
 
     def decir_letra(self, letra):
-        if self.ruleta.letras[letra] == False:
-            self.ruleta.letras[letra] = True
-            return True
-        else:
-            return False
+        try:
+            if self.ruleta.consonantes[letra] == False:
+                self.ruleta.consonantes[letra] = True
+                return 1
+            else:
+                return 0
+        except:
+            return -1
 
     def resolver_panel(self, panel_jugador, panel):
         if panel_jugador == panel:

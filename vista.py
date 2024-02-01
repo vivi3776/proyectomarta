@@ -12,6 +12,9 @@ class Vista:
         print("------ERROR----")
         print("Debes añadir al menos dos jugadores")
 
+    def error_vocal_consonante(self):
+        print("Escribe un carácter correcto")
+
     def menu_inicio(self):
         print("1. Añadir jugador")
         print("2. Mostrar jugadores")
@@ -21,20 +24,21 @@ class Vista:
             opcion = int(input(""))
             return opcion
         except:
-            return 5
+            return 6
 
     def menu_jugador(self):
         print("Qué quieres hacer?")
         print("1. Tirar")
-        print("2. Resolver panel")
-        print("3. Ver Comodines")
-        print("4. Ver dinero actual")
+        print("2. Comprar vocal")
+        print("3. Resolver panel")
+        print("4. Ver Comodines")
+        print("5. Ver dinero actual")
 
         try:
             opcion = int(input(""))
             return opcion
         except:
-            return 5
+            return 6
 
     def mostrar_comodines(self, comodines):
         print(f"Tus comodines actuales son: {comodines}")
@@ -107,7 +111,6 @@ class Vista:
 
     def letra_en_panel(self):
         print("La letra estaba en el panel!")
-        print("Este es el panel actualizado!")
 
     def panel_correcto(self):
         print("Has acertado el panel! Felicidades")

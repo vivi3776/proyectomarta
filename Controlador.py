@@ -47,13 +47,13 @@ class Controlador:
         while b_menu:
             menu = self.vista.menu_jugador()
 
-            if menu != 5:  # Tirar
-                b_menu = False
-
-            else:
+            if menu > 5:
                 self.vista.error_menu()
                 time.sleep(2)
                 system("cls")
+
+            else:
+                b_menu = False
 
         return menu
 
@@ -88,10 +88,13 @@ class Controlador:
 
     def decir_letra(self):
         letra = self.vista.decir_letra()
-        if self.modelo.decir_letra(letra):
+        if self.modelo.decir_letra(letra) == 1:
             return letra
-        else:
+        elif self.modelo.decir_letra(letra) == 0:
             self.vista.letra_ya_dicha()
+            return ""
+        else:
+            self.vista.error_vocal_consonante()
             return ""
 
     def comprar_vocal(self):
@@ -102,9 +105,14 @@ class Controlador:
 
         elif return_vocal == 1:  # Se ha comprado la vocal
             self.vista.vocal_comprada()
+            return vocal
 
         elif return_vocal == 2:  # No se compra vocal ya dicha
             self.vista.letra_ya_dicha()
+        else:
+            self.vista.error_vocal_consonante()
+
+        return ""
 
     def resolver_panel(self, panel):
         panel_jugador = self.vista.resolver_panel()
@@ -133,29 +141,25 @@ class Controlador:
             if self.usar_comodin(jugador):
                 self.vista.usar_comodin
                 self.modelo.usar_comodin(jugador)
-                return False
+
             else:
                 self.siguiente_jugador()
-                return False
 
         elif tirada == "2":  # Comodin
             self.vista.caer_comodin()
-            return True
 
         elif tirada == "3":  # x2
             self.vista.caer_x2()
             time.sleep(1)
-            return True
 
         elif tirada == "4":  # /2
             self.vista.caer_e2()
             time.sleep(1)
-            return True
 
         else:  # Gajo normal
             self.vista.caer(tirada)
             time.sleep(1)
-            return True
+        return tirada
 
     def inicio(self):
         self.bienvenida()
@@ -171,36 +175,45 @@ class Controlador:
                 jugador = self.modelo.jugadores[self.orden_jugador]
                 menu = self.menu_jugador()
                 if menu == 1:  # TIrar
-                    if self.tirar():
-                        letra = self.decir_letra()
-                        if letra != "":
-                            panel_oculto_2 = self.modelo.descubrir_panel(
-                                panel, panel_oculto, letra
-                            )
-                            if (
-                                panel_oculto == panel_oculto_2
-                            ):  # La letra no estaba en el panel
-                                self.vista.letra_no_en_panel()
-                                time.sleep(1)
-                                self.siguiente_jugador()
-                            else:  # La letra estaba en el panel y sigues jugando
-                                panel_oculto = panel_oculto_2
-                                self.vista.letra_en_panel()
-                                time.sleep(1)
-                                self.vista.panel(panel_oculto)  # TODO pedir por comodin
-
-                        else:  # Letra ya dichaa
+                    tirar = self.tirar()
+                    letra = self.decir_letra()
+                    if letra != "":
+                        panel_oculto_2 = self.modelo.descubrir_panel(
+                            panel, panel_oculto, letra
+                        )
+                        if (
+                            panel_oculto == panel_oculto_2
+                        ):  # La letra no estaba en el panel
+                            self.vista.letra_no_en_panel()
+                            time.sleep(1)
                             self.siguiente_jugador()
+                        else:  # La letra estaba en el panel y sigues jugando
+                            self.modelo.actualizar_info(jugador, tirar)
 
-                elif menu == 2:  # Resolver
+                            panel_oculto = panel_oculto_2
+                            self.vista.letra_en_panel()
+                            time.sleep(1)
+                            self.vista.panel(panel_oculto)  # TODO pedir por comodin
+
+                    else:  # Letra ya dichaa
+                        self.siguiente_jugador()
+                elif menu == 2:  # Comprar voccal
+                    vocal = self.comprar_vocal()
+
+                    if vocal != "":
+                        panel_oculto = self.modelo.descubrir_panel(
+                            panel, panel_oculto, vocal
+                        )
+                        self.vista.panel(panel_oculto)
+                elif menu == 3:  # Resolver
                     if self.resolver_panel(panel):
                         time.sleep(3)
                         jugar = False
                     else:
                         self.siguiente_jugador()
-                elif menu == 3:  # Ver comodines
+                elif menu == 4:  # Ver comodines
                     self.vista.mostrar_comodines(jugador.comodines)
-                elif menu == 4:  # Dinero
+                elif menu == 5:  # Dinero
                     self.vista.mostrar_dinero(jugador.puntuacion)
 
         else:
@@ -215,7 +228,3 @@ class Controlador:
         self.orden_jugador = (self.orden_jugador + 1) % len(self.modelo.jugadores)
         jugador = self.modelo.jugadores[self.orden_jugador]
         self.vista.siguiente_jugador(jugador.nombre)
-
-
-controlador = Controlador(modelo=Modelo(), vista=Vista())
-controlador.inicio()
