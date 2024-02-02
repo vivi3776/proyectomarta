@@ -20,4 +20,4 @@ class Jugador:
 
 
 # Crear la instancia de Jugador
-j1 = Jugador("Jorge", 5.0)
+# j1 = Jugador("Jorge", 5.0)

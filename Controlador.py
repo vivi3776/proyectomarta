@@ -28,7 +28,6 @@ class Controlador:
                 b_menu = False
                 self.crear_jugador()
             elif menu == 2:  # Mostrar jugador
-                b_menu = False
                 self.modelo.mostrar_jugadores()
             elif menu == 3:  # Jugar
                 self.jugar()
@@ -178,8 +177,8 @@ class Controlador:
                     tirar = self.tirar()
                     letra = self.decir_letra()
                     if letra != "":
-                        panel_oculto_2 = self.modelo.descubrir_panel(
-                            panel, panel_oculto, letra
+                        panel_oculto_2 = str(
+                            self.modelo.descubrir_panel(panel, panel_oculto, letra)
                         )
                         if (
                             panel_oculto == panel_oculto_2
@@ -201,8 +200,8 @@ class Controlador:
                     vocal = self.comprar_vocal()
 
                     if vocal != "":
-                        panel_oculto = self.modelo.descubrir_panel(
-                            panel, panel_oculto, vocal
+                        panel_oculto = str(
+                            self.modelo.descubrir_panel(panel, panel_oculto, vocal)
                         )
                         self.vista.panel(panel_oculto)
                 elif menu == 3:  # Resolver

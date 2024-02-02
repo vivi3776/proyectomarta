@@ -13,6 +13,14 @@ class Modelo:
     ruleta: Ruleta
     jugadores: list[Jugador]
 
+    def __init__(self):
+        # self.vista = Vista()
+        self.ruleta = Ruleta()
+        self.jugadores = []
+        self.jugador = Jugador(
+            "Juan",
+        )
+
     def descubrir_panel(
         self, panel: str, panel_oculto: str, letra: str
     ):  # TODO NO FUNCIONA
@@ -20,7 +28,10 @@ class Modelo:
         for posicion in range(len(panel)):
             if panel[posicion].lower() == letra.lower():
                 lista2[posicion] = letra
-        return lista2
+        e = ""
+        for i in range(len(lista2)):
+            e = e + lista2[i]
+        return str(e)
 
     def generar_panel(self):
         numero = random.randint(1, len(self.ruleta.panel))
@@ -36,14 +47,6 @@ class Modelo:
 
         return panel_oculto, panel
 
-    def __init__(self):
-        # self.vista = Vista()
-        self.ruleta = Ruleta()
-        self.jugadores = []
-        self.jugador = Jugador(
-            "Juan",
-        )
-
     def agregar_jugador(self, nombre_jugador: str):
         jugador = Jugador(nombre_jugador)
         if jugador not in self.jugadores:
@@ -53,8 +56,9 @@ class Modelo:
             return False
 
     def mostrar_jugadores(self):
+        print("Los jugadores son:")
         for jugador in self.jugadores:
-            print(jugador)
+            print(f"- {jugador.nombre} -")
 
     def comprobar_comodin(self, jugador: Jugador):
         if jugador.comodines == 0:
