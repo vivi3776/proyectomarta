@@ -23,7 +23,7 @@ class Modelo:
 
     def descubrir_panel(
         self, panel: str, panel_oculto: str, letra: str
-    ):  # TODO NO FUNCIONA
+    ): 
         lista2 = list(panel_oculto)
         for posicion in range(len(panel)):
             if panel[posicion].lower() == letra.lower():
@@ -45,7 +45,7 @@ class Modelo:
             else:
                 panel_oculto = panel_oculto + " "
 
-        return panel_oculto, panel
+        return panel_oculto, panel, pista
 
     def agregar_jugador(self, nombre_jugador: str):
         jugador = Jugador(nombre_jugador)

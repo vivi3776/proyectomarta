@@ -1,3 +1,5 @@
+
+
 class Vista:
     def bienvenida(self):
         print("---------------------------")
@@ -26,13 +28,22 @@ class Vista:
         except:
             return 6
 
-    def menu_jugador(self):
+    def menu_jugador(self, jugador, pista):
+        print("")
+        print("---------------------------------")
+        print("")
+        print(f"              {pista}")
+        print("")
+        print(f"              {jugador}")
+        print("")
         print("Qué quieres hacer?")
         print("1. Tirar")
         print("2. Comprar vocal")
         print("3. Resolver panel")
         print("4. Ver Comodines")
         print("5. Ver dinero actual")
+        print("")
+        print("---------------------------------")
 
         try:
             opcion = int(input(""))
@@ -84,7 +95,7 @@ class Vista:
     def decir_letra(self):
         print("¡Dime una letra!")
         letra = input("")
-        return letra
+        return letra.lower()
 
     def no_hay_dinero(self):
         print("No tienes suficiente dinero para comprar vocal!")
@@ -98,7 +109,7 @@ class Vista:
     def comprar_vocal(self):
         print("Qué vocal quieres comprar?")
         vocal = input("")
-        return vocal
+        return vocal.lower()
 
     def resolver_panel(self):
         print("Escribe el  panel correcto")

@@ -40,11 +40,12 @@ class Controlador:
                 time.sleep(2)
                 system("cls")
 
-    def menu_jugador(self):
+    def menu_jugador(self, pista):
+        jugador = self.modelo.jugadores[self.orden_jugador]
         b_menu = True
 
         while b_menu:
-            menu = self.vista.menu_jugador()
+            menu = self.vista.menu_jugador(jugador.nombre,pista)
 
             if menu > 5:
                 self.vista.error_menu()
@@ -168,11 +169,13 @@ class Controlador:
     def jugar(self):
         jugar = True
         if len(self.modelo.jugadores) >= 2:
-            panel_oculto, panel = self.modelo.generar_panel()
+            time.sleep(0.5)
+            system("cls")
+            panel_oculto, panel, pista = self.modelo.generar_panel()    #Caracteristicas del panel generado
             self.vista.panel(panel_oculto)
             while jugar:
                 jugador = self.modelo.jugadores[self.orden_jugador]
-                menu = self.menu_jugador()
+                menu = self.menu_jugador(pista)
                 if menu == 1:  # TIrar
                     tirar = self.tirar()
                     letra = self.decir_letra()
