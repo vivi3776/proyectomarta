@@ -56,9 +56,14 @@ class Modelo:
             return False
 
     def mostrar_jugadores(self):
-        print("Los jugadores son:")
-        for jugador in self.jugadores:
-            print(f"- {jugador.nombre} -")
+        print("")
+        if len(self.jugadores) == 0:
+            print("No hay jugadores actualmente")
+        else:
+            print("Los jugadores son:")
+            for jugador in self.jugadores:
+                print(f"- {jugador.nombre} -")
+        print("")
 
     def comprobar_comodin(self, jugador: Jugador):
         if jugador.comodines == 0:
@@ -70,21 +75,21 @@ class Modelo:
         jugador.comodines -= 1
 
     def actualizar_info(self, jugador: Jugador, valor):
-        if valor == 0:
+        if int(valor) == 0:
             self.jugador.puntuacion = 0
             # QUIEBRA
-        elif valor == 1:
+        elif int(valor) == 1:
             self.jugador.puntuacion = 0
             # PIERDE TURNO
 
-        elif valor == 2:
+        elif int(valor) == 2:
             jugador.comodines += 1
             # COMODIN
-        elif valor == 3:  # x2
-            jugador.puntuacion *= 2
+        elif int(valor) == 3:  # x2
+            jugador.puntuacion = jugador.puntuacion * 2
 
-        elif valor == 4:  # /2
-            jugador.puntuacion /= 2
+        elif int(valor) == 4:  # /2
+            jugador.puntuacion = jugador.puntuacion / 2
 
         else:
             jugador.puntuacion += int(valor)

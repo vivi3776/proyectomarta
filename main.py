@@ -7,4 +7,4 @@ juego = Controlador(modelo=Modelo(), vista=Vista())
 juego.inicio()
 
 
-#TODO revisar como se añade el dinero que se suma mal
+#TODO cambir el modelo.mostrar_jugadores y ponerlo en vista

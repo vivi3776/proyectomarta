@@ -23,12 +23,16 @@ class Controlador:
     def menu_inicio(self):
         b_menu = True
         while b_menu:
+            self.bienvenida()
             menu = self.vista.menu_inicio()
             if menu == 1:  # Añadir jugador
                 b_menu = False
                 self.crear_jugador()
+                
             elif menu == 2:  # Mostrar jugador
                 self.modelo.mostrar_jugadores()
+                time.sleep(2)
+                system("cls")
             elif menu == 3:  # Jugar
                 self.jugar()
                 b_menu = False
@@ -79,7 +83,9 @@ class Controlador:
             self.vista.jugador_creado()
         else:
             self.vista.jugador_no_creado()
-
+            
+        time.sleep(2)
+        system("cls")
         self.menu_inicio()
 
     def mostrar_jugadores(self):
@@ -164,6 +170,7 @@ class Controlador:
     def inicio(self):
         self.bienvenida()
         time.sleep(1)
+        system("cls")
         self.menu_inicio()
 
     def jugar(self):
@@ -219,7 +226,7 @@ class Controlador:
                     self.vista.mostrar_dinero(jugador.puntuacion)
 
         else:
-            self.vista.error_jugadores
+            self.vista.error_jugadores()
             time.sleep(2)
             system("cls")
             self.menu_inicio()

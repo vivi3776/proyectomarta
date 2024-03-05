@@ -2,17 +2,21 @@
 
 class Vista:
     def bienvenida(self):
-        print("---------------------------")
-        print("--- RULETA DE LA SUERTE ---")
-        print("---------------------------")
+        print("")
+        print("--------------------------------------------------------")
+        print("---                RULETA DE LA SUERTE               ---")
+        print("--------------------------------------------------------")
+        print("")
 
     def error_menu(self):
         print("-----------ERROR-----------")
         print("Escribe una opción correcta")
 
     def error_jugadores(self):
-        print("------ERROR----")
+        print("-------------------------ERROR-----------------------")
+        print("")
         print("Debes añadir al menos dos jugadores")
+        print("")
 
     def error_vocal_consonante(self):
         print("Escribe un carácter correcto")
@@ -22,6 +26,7 @@ class Vista:
         print("2. Mostrar jugadores")
         print("3. Jugar")
         print("4. Salir")
+        print("")
         try:
             opcion = int(input(""))
             return opcion
@@ -82,15 +87,21 @@ class Vista:
         print("Pierdes el turno")
 
     def crear_jugador(self):
+        print("")
         print("Dime el nombre del nuevo jugador")
+        print("")
         jugador = input("")
         return jugador
 
     def jugador_creado(self):
+        print("")
         print("Has añadido al jugador con éxito")
+        print("")
 
     def jugador_no_creado(self):
+        print("")
         print("Ese jugador ya existe!")
+        print("")
 
     def decir_letra(self):
         print("¡Dime una letra!")
