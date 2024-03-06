@@ -33,13 +33,19 @@ class Vista:
         except:
             return 6
 
-    def menu_jugador(self, jugador, pista):
+    def menu_jugador(self, jugador, pista, panel):
         print("")
-        print("---------------------------------")
+        print("---------------------------------------------------------------------")
         print("")
-        print(f"              {pista}")
         print("")
-        print(f"              {jugador}")
+        print(f"                        {pista}")
+        print("")
+        print("")
+        print(f"           {panel}           ")
+        print("")
+        print("")
+        print(f"Turno de: [{jugador}]")
+        print("")
         print("")
         print("Qué quieres hacer?")
         print("1. Tirar")
@@ -48,7 +54,8 @@ class Vista:
         print("4. Ver Comodines")
         print("5. Ver dinero actual")
         print("")
-        print("---------------------------------")
+        print("---------------------------------------------------------------------")
+        print("")
 
         try:
             opcion = int(input(""))
@@ -169,4 +176,6 @@ class Vista:
         print(f"Has caido en: {gajo}")
 
     def panel(self, panel):
+        print("")
         print(f"El panel es \n{panel}")
+        print("")

@@ -1,3 +1,5 @@
+from dataclasses import dataclass
+@dataclass
 class Ruleta:
     gajos: list
     consonantes = dict.fromkeys("bcdfghjklmnpqrstvwxyz", False)

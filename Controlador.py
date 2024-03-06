@@ -7,19 +7,22 @@ import time
 class Controlador:
     modelo: Modelo
     vista: Vista
-    orden_jugador: int  # Se trata del jugador q empezará
+    orden_jugador: int  # Se trata del jugador que empezará
 
+    #Constructor
     def __init__(self, modelo, vista, orden_jugador=0):
         self.modelo = modelo
         self.vista = vista
         self.orden_jugador = orden_jugador
 
-    def bienvenida(self):
+    def bienvenida(self):#Funcion que da la bienvenida
         self.vista.bienvenida()
 
+    #Funcion que cierra el juego
     def salir(self):
         self.vista.salir()
 
+    #Creacion del menú de inicio del juego
     def menu_inicio(self):
         b_menu = True
         while b_menu:
@@ -44,12 +47,13 @@ class Controlador:
                 time.sleep(2)
                 system("cls")
 
-    def menu_jugador(self, pista):
+    #Creacion del menu del jugador una vez que se inicia el juego
+    def menu_jugador(self, pista, panel):
         jugador = self.modelo.jugadores[self.orden_jugador]
         b_menu = True
 
         while b_menu:
-            menu = self.vista.menu_jugador(jugador.nombre,pista)
+            menu = self.vista.menu_jugador(jugador.nombre,pista, panel)
 
             if menu > 5:
                 self.vista.error_menu()
@@ -61,6 +65,7 @@ class Controlador:
 
         return menu
 
+    #Funcion para usar un comodin
     def usar_comodin(self, jugador):
         comprobar_comodin = self.modelo.comprobar_comodin(jugador)
         if comprobar_comodin:
@@ -77,6 +82,7 @@ class Controlador:
                     self.vista.no_usar_comodin()
                     return False
 
+    #Funcion para crear un jugador
     def crear_jugador(self):
         jugador = self.vista.crear_jugador()
         if self.modelo.agregar_jugador(jugador):
@@ -88,10 +94,12 @@ class Controlador:
         system("cls")
         self.menu_inicio()
 
+    #Funcion que muestra la lista de todos los jugadores creados
     def mostrar_jugadores(self):
         # TODO MOSTRAR JUGADORES
         pass
-
+    
+    #Funcion para decir y comprobar una letra 
     def decir_letra(self):
         letra = self.vista.decir_letra()
         if self.modelo.decir_letra(letra) == 1:
@@ -103,6 +111,7 @@ class Controlador:
             self.vista.error_vocal_consonante()
             return ""
 
+    #Funcion para comprar una vocal
     def comprar_vocal(self):
         vocal = self.vista.comprar_vocal()
         return_vocal = self.modelo.comprar_vocal(vocal)
@@ -120,6 +129,7 @@ class Controlador:
 
         return ""
 
+    #Funcion para resolver un panel
     def resolver_panel(self, panel):
         panel_jugador = self.vista.resolver_panel()
 
@@ -130,6 +140,7 @@ class Controlador:
             self.vista.panel_incorrecto()
             return False
 
+    #Funcion para que el jugador tire a la ruleta y caiga en un gajo
     def tirar(self):
         jugador = self.modelo.jugadores[self.orden_jugador]
         tirada = self.modelo.tirar(jugador)
@@ -167,22 +178,31 @@ class Controlador:
             time.sleep(1)
         return tirada
 
+    #Funcion que combina la bienvenida con el menu de inicio
     def inicio(self):
         self.bienvenida()
         time.sleep(1)
         system("cls")
         self.menu_inicio()
+    
+    #Funcion que hace funcionar el paso de jugadores
+    def siguiente_jugador(self):
+        self.orden_jugador = (self.orden_jugador + 1) % len(self.modelo.jugadores)
+        jugador = self.modelo.jugadores[self.orden_jugador]
+        self.vista.siguiente_jugador(jugador.nombre)
 
+    #Funcion que hace que un el juego funcione
     def jugar(self):
         jugar = True
         if len(self.modelo.jugadores) >= 2:
             time.sleep(0.5)
             system("cls")
             panel_oculto, panel, pista = self.modelo.generar_panel()    #Caracteristicas del panel generado
-            self.vista.panel(panel_oculto)
             while jugar:
+                time.sleep(1)
+                system("cls")
                 jugador = self.modelo.jugadores[self.orden_jugador]
-                menu = self.menu_jugador(pista)
+                menu = self.menu_jugador(pista, panel_oculto)
                 if menu == 1:  # TIrar
                     tirar = self.tirar()
                     letra = self.decir_letra()
@@ -213,7 +233,6 @@ class Controlador:
                         panel_oculto = str(
                             self.modelo.descubrir_panel(panel, panel_oculto, vocal)
                         )
-                        self.vista.panel(panel_oculto)
                 elif menu == 3:  # Resolver
                     if self.resolver_panel(panel):
                         time.sleep(3)
@@ -233,7 +252,4 @@ class Controlador:
 
         self.vista.salir()
 
-    def siguiente_jugador(self):
-        self.orden_jugador = (self.orden_jugador + 1) % len(self.modelo.jugadores)
-        jugador = self.modelo.jugadores[self.orden_jugador]
-        self.vista.siguiente_jugador(jugador.nombre)
+
