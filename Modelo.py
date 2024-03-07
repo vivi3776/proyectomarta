@@ -23,7 +23,8 @@ class Modelo:
 
     def descubrir_panel(
         self, panel: str, panel_oculto: str, letra: str
-    ): 
+    ):  
+        #Compara la letra dicha con el panel y si la tiene lo coloca en la poscion del panel oculto
         lista2 = list(panel_oculto)
         for posicion in range(len(panel)):
             if panel[posicion].lower() == letra.lower():
@@ -34,9 +35,10 @@ class Modelo:
         return str(e)
 
     def generar_panel(self):
+        #Genera un panel aleatorio de los disponibles
         numero = random.randint(1, len(self.ruleta.panel))
         pista = self.ruleta.pista[numero]
-        panel = self.ruleta.panel[pista]
+        panel = self.ruleta.panel[numero]
 
         panel_oculto = ""
         for letra in panel:
@@ -49,6 +51,7 @@ class Modelo:
 
     def agregar_jugador(self, nombre_jugador: str):
         jugador = Jugador(nombre_jugador)
+        #Comprueba si hay un jugador con ese nombre si no lo hay lo añade
         if jugador not in self.jugadores:
             self.jugadores.append(jugador)
             return True
@@ -57,6 +60,7 @@ class Modelo:
 
     def mostrar_jugadores(self):
         print("")
+        #Muestra los jugadores
         if len(self.jugadores) == 0:
             print("No hay jugadores actualmente")
         else:
@@ -147,5 +151,14 @@ class Modelo:
         else:
             return False
 
+    def leer_paneles_del_txt(self):
+        with open('paneles.txt', 'r') as archivo:
 
-# juego = Modelo()
+            todas_lineas = archivo.readlines()[4:]
+
+            for i, linea in enumerate(todas_lineas):
+                if i % 2 == 0: #Si son paneles
+                    self.ruleta.pista.append(linea.strip())  
+                else:
+                    self.ruleta.panel.append(linea.strip())  # Si son pistas
+

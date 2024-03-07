@@ -197,6 +197,7 @@ class Controlador:
         if len(self.modelo.jugadores) >= 2:
             time.sleep(0.5)
             system("cls")
+            self.modelo.leer_paneles_del_txt()
             panel_oculto, panel, pista = self.modelo.generar_panel()    #Caracteristicas del panel generado
             while jugar:
                 time.sleep(1)

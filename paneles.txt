@@ -1,0 +1,10 @@
+***********************************************************************************************************************************
+*****PARA AÑADIR UN PANEL ESCRIBE EN UNA LINEA LA PISTA Y EN LA LINEA SIGUIENTE SU RESOLUCION SIN DEJAR LINEAS EN BLANCO***********
+*****                    EN CASO DE NO HACERLO EL PROGRAMA PUEDE ROMPER.                                                ***********
+***********************************************************************************************************************************
+CANCIÓN POPULAR 
+Melodía conocida y apreciada por un amplio publico
+REVOLUCIÓN INDUSTRIAL 
+Paso de la producción manual a la industrial
+SMARTPHONE
+Dispositivo movil con funciones avanzadas

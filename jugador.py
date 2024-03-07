@@ -29,7 +29,10 @@ class Jugador:
     
     @staticmethod
     def nombre_correcto(nombre: str) ->bool:
-        pass
+        if nombre.isalpha():
+            return True
+        else:
+            return False
         
 
     #Getters y setters de puntuacion

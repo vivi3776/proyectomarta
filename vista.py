@@ -179,3 +179,8 @@ class Vista:
         print("")
         print(f"El panel es \n{panel}")
         print("")
+    
+    def no_hay_jugadores(self):
+        print("")
+        print("No hay jugadores actualmente")
+        print("")
