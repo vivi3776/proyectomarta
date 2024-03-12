@@ -33,7 +33,7 @@ class Controlador:
                 self.crear_jugador()
                 
             elif menu == 2:  # Mostrar jugador
-                self.modelo.mostrar_jugadores()
+                self.vista.mostrar_jugadores(self.modelo.jugadores)
                 time.sleep(2)
                 system("cls")
             elif menu == 3:  # Jugar
@@ -130,10 +130,10 @@ class Controlador:
         return ""
 
     #Funcion para resolver un panel
-    def resolver_panel(self, panel):
+    def resolver_panel(self, panel:str):
         panel_jugador = self.vista.resolver_panel()
 
-        if self.modelo.resolver_panel(panel_jugador, panel):
+        if self.modelo.resolver_panel(panel_jugador.lower(), panel.lower()):
             self.vista.panel_correcto()
             return True
         else:

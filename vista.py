@@ -33,12 +33,12 @@ class Vista:
         except:
             return 6
 
-    def menu_jugador(self, jugador, pista, panel):
+    def menu_jugador(self, jugador, pista, panel,letras):
         print("")
         print("---------------------------------------------------------------------")
         print("")
         print("")
-        print(f"                        {pista}")
+        print(f"                        {pista.upper()}")
         print("")
         print("")
         print(f"           {panel}           ")
@@ -183,4 +183,15 @@ class Vista:
     def no_hay_jugadores(self):
         print("")
         print("No hay jugadores actualmente")
+        print("")
+    
+    def mostrar_jugadores(self, jugadores):
+        print("")
+        #Muestra los jugadores
+        if len(jugadores) == 0:
+            print("No hay jugadores actualmente")
+        else:
+            print("Los jugadores son:")
+            for jugador in jugadores:
+                print(f"- {jugador.nombre} -")
         print("")

@@ -58,26 +58,19 @@ class Modelo:
         else:
             return False
 
-    def mostrar_jugadores(self):
-        print("")
-        #Muestra los jugadores
-        if len(self.jugadores) == 0:
-            print("No hay jugadores actualmente")
-        else:
-            print("Los jugadores son:")
-            for jugador in self.jugadores:
-                print(f"- {jugador.nombre} -")
-        print("")
 
+
+    #Funcion que comprueba si tienes o no comodines
     def comprobar_comodin(self, jugador: Jugador):
         if jugador.comodines == 0:
             return False
         else:
             return True
-
+    #Usar comodin
     def usar_comodin(self, jugador: Jugador):
         jugador.comodines -= 1
 
+    #Acctualizar el dinero segun la tirada
     def actualizar_info(self, jugador: Jugador, valor):
         if int(valor) == 0:
             self.jugador.puntuacion = 0
@@ -98,9 +91,10 @@ class Modelo:
         else:
             jugador.puntuacion += int(valor)
 
+    #Funcion que realiza una tirada aleatoria
     def tirar(self, jugador: Jugador):
         valor = random.randint(0, 23)
-        tirada = self.ruleta.gajos[valor]
+        tirada = self.ruleta.GAJOS[valor]
         if valor == 0:
             # self.jugador.puntuacion = 0
             return "0"  # QUIEBRA
@@ -121,8 +115,9 @@ class Modelo:
             # jugador.puntuacion += int(tirada)
             return tirada
 
+    #Funcion para comprar vocal si hay o no dinero
     def comprar_vocal(self, vocal):
-        if self.jugador.puntuacion >= 50:
+        if self.jugador.puntuacion >= 50:  #Precio de la vocal
             try:
                 if self.ruleta.vocales[vocal] == False:
                     self.ruleta.vocales[vocal] = True
@@ -135,6 +130,7 @@ class Modelo:
         else:
             return 0
 
+    #Funcion que devuelve un valor dependiendo si la letra esta en el panel o no, o no es una letra
     def decir_letra(self, letra):
         try:
             if self.ruleta.consonantes[letra] == False:
@@ -144,13 +140,14 @@ class Modelo:
                 return 0
         except:
             return -1
-
+    #Funcion que devuelve true o false si el jugador acierta o no el panel
     def resolver_panel(self, panel_jugador, panel):
-        if panel_jugador == panel:
+        if panel_jugador.lower() == panel.lower():
             return True
         else:
             return False
 
+    #Se leen los paneles del txt y se guardan en dos listas. una de pistas otra de paneles
     def leer_paneles_del_txt(self):
         with open('paneles.txt', 'r') as archivo:
 
@@ -162,3 +159,15 @@ class Modelo:
                 else:
                     self.ruleta.panel.append(linea.strip())  # Si son pistas
 
+    def lista_letras_dichas(self):
+        consonantes = []
+        vocales = []
+        
+        for letra in self.ruleta.consonantes:
+            if self.ruleta.consonantes[letra]:  # Verifica si el valor es True
+                consonantes.append(letra)
+        for letra in self.ruleta.vocales:
+            if self.ruleta.vocales[letra]:  # Verifica si el valor es True
+                vocales.append(letra)
+        letras = consonantes + vocales
+        return consonantes.sort()

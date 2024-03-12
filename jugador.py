@@ -1,7 +1,8 @@
 import random
 from ruleta import Ruleta
+from dataclasses import dataclass
 
-
+@dataclass
 class Jugador:
     __nombre: str
     __puntuacion: float
@@ -15,8 +16,6 @@ class Jugador:
     def __str__(self):
         return f"Bienvenido {self.nombre}, empiezas con {self.puntuacion}"
 
-    def mostrar_puntuacion(self):
-        return self.puntuacion
     
     #Getters y setters de nombre
     @property
@@ -42,7 +41,8 @@ class Jugador:
 
     @puntuacion.setter
     def puntuacion(self, puntuacion):
-        self.__puntuacion = puntuacion
+        if puntuacion >= 0:
+            self.__puntuacion = puntuacion
 
     #Getters y setters de comodines
     @property
@@ -51,7 +51,8 @@ class Jugador:
 
     @comodines.setter
     def comodines(self, comodines):
-        self.__comodines = comodines
+        if comodines >= 0:
+            self.__comodines = comodines
 
     
 

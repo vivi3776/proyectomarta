@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 @dataclass
 class Ruleta:
-    gajos: list
+    GAJOS: list
     consonantes = dict.fromkeys("bcdfghjklmnpqrstvwxyz", False)
     vocales = dict.fromkeys("aeiou", False)
     panel: list
@@ -11,7 +11,7 @@ class Ruleta:
         self.panel = []
         self.pista = []
 
-        self.gajos = [
+        self.GAJOS = [
             "QUIEBRA",  # quiebra
             "PIERDE TURNO",
             "COMODIN",
@@ -37,3 +37,4 @@ class Ruleta:
             "100",
             "200",
         ]
+
