@@ -8,3 +8,4 @@ if __name__ == "__main__":
 
 #TODO mostrar las letras que ya estaban dichas
 #TODO hacer una tirada menos aleatoria
+    #TODO EQWQWEEWQ
