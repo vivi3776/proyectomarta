@@ -33,7 +33,7 @@ class Vista:
         except:
             return 6
 
-    def menu_jugador(self, jugador, pista, panel,letras):
+    def menu_jugador(self, jugador, pista, panel):
         print("")
         print("---------------------------------------------------------------------")
         print("")
