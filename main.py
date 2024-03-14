@@ -8,5 +8,5 @@ if __name__ == "__main__":
 
 #TODO mostrar las letras que ya estaban dichas
 #TODO hacer una tirada menos aleatoria
-    #TODO cambiar el txt para que si esta vacio 1 no pete y 2 añadir paneles de ejemplo
 #TODO multiplicar el dinero x las letras q han aparecido
+#TODO poner bien la clase ruleta

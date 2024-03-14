@@ -7,7 +7,7 @@ class Ruleta:
     panel: list
     pista: list
 
-    def __init__(self):
+    def __init__(self, gajos, panel, pista, vocales, consonantes):
         self.panel = []
         self.pista = []
 

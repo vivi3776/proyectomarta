@@ -149,16 +149,37 @@ class Modelo:
 
     #Se leen los paneles del txt y se guardan en dos listas. una de pistas otra de paneles
     def leer_paneles_del_txt(self):
-        with open('paneles.txt', 'r') as archivo:
+        stock_lines = [
+        "CANCION POPULAR\n",
+        "Melodia conocida y apreciada por un amplio público\n",
+        "REVOLUCIÓN INDUSTRIAL\n",
+        "Paso de la producción manual a la industrial\n",
+        "SMARTPHONE\n",
+        "Dispositivo móvil con funciones avanzadas\n"
+        ]   
 
-            todas_lineas = archivo.readlines()[4:]
+        with open('paneles.txt', 'r+') as archivo:
+            try:
+                todas_lineas = archivo.readlines()[5:]
+                print(len(todas_lineas))
+                if len(todas_lineas) < 4:
+                    # Agregar líneas de stock al archivo
+                    archivo.writelines(stock_lines)
+                    todas_lineas.extend(stock_lines)
 
-            for i, linea in enumerate(todas_lineas):
-                if i % 2 == 0: #Si son paneles
-                    self.ruleta.pista.append(linea.strip())  
-                else:
-                    self.ruleta.panel.append(linea.strip())  # Si son pistas
+                for i, linea in enumerate(todas_lineas):
+                    if i % 2 == 0: #Si son pistas
+                        self.ruleta.pista.append(linea.strip())  
+                    else:   #Si son paneles
+                        self.ruleta.panel.append(linea.strip())  # Si son pistas
 
+            except (IOError, FileNotFoundError):
+                # En caso de error, agregar líneas de stock al archivo
+                archivo.writelines(stock_lines)
+                todas_lineas = stock_lines
+                                  
+
+            
     def lista_letras_dichas(self):
         consonantes = []
         vocales = []

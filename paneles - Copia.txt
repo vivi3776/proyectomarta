@@ -1,10 +1,9 @@
 ***********************************************************************************************************************************
 *****PARA AÑADIR UN PANEL ESCRIBE EN UNA LINEA LA PISTA Y EN LA LINEA SIGUIENTE SU RESOLUCION SIN DEJAR LINEAS EN BLANCO***********
 *****             EVITA USAR ACENTOS. EN CASO DE NO HACERLO EL PROGRAMA PUEDE ROMPER.                                   ***********
-*****             AÑADE AL MENOS 2 PANELES DE NO SER ASI SE AGREGARAN LOS DE STOCK                                      ***********                   
 ***********************************************************************************************************************************
 CANCION POPULAR
-Melodia conocida y apreciada por un amplio publico
+Melodia conocida y apreciada por un amplio público
 REVOLUCIÓN INDUSTRIAL
 Paso de la producción manual a la industrial
 SMARTPHONE
